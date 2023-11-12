@@ -1,6 +1,6 @@
 ## Output
 
-![Final Look]
+Final Look
 ![alt text](https://billofficials.tinytake.com/media/155a0cb?filename=1699794760449_TinyTake12-11-2023-05-12-35_638353915589545552.png&sub_type=thumbnail_preview&type=attachment&width=1198&height=543)
 
 # Getting Started with Create React App
