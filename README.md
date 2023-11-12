@@ -27,3 +27,10 @@ You may also see any lint errors in the console.
   https://www.react-google-charts.com/
 - React Loader Spinner
   https://mhnpd.github.io/react-loader-spinner/docs/intro
+- React Icons
+  https://react-icons.github.io/react-icons
+
+  ## API
+
+  FRED Economic Data
+  https://fred.stlouisfed.org/docs/api/fred/
