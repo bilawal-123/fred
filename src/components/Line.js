@@ -2,54 +2,66 @@ import { Chart } from "react-google-charts";
 import useApi from "../api/fetch/index";
 import { useEffect, useState } from "react";
 import config from "../config/config";
+
 // Loader component
 import { Bars } from "react-loader-spinner";
-export default function Line(props) {
-  const seriesId1 = props.id1;
-  const seriesId2 = props.id2;
-  const apiUrl1 = `${config.apiPath}${seriesId1}&api_key=${config.apiKey}&file_type=json`;
-  const apiUrl2 = `${config.apiPath}${seriesId2}&api_key=${config.apiKey}&file_type=json`;
 
-  const { data: data1, loading: loading1, error: error1 } = useApi(apiUrl1);
-  const { data: data2, loading: loading2, error: error2 } = useApi(apiUrl2);
+export default function LineChartComparison(props) {
+  const firstSeriesId = props.firstSeriesId;
+  const secondSeriesId = props.secondSeriesId;
+
+  const firstSeriesApiUrl = `${config.apiPath}${firstSeriesId}&api_key=${config.apiKey}&file_type=json`;
+  const secondSeriesApiUrl = `${config.apiPath}${secondSeriesId}&api_key=${config.apiKey}&file_type=json`;
+
+  const {
+    data: firstSeriesData,
+    loading: firstSeriesLoading,
+    error: firstSeriesError,
+  } = useApi(firstSeriesApiUrl);
+  const {
+    data: secondSeriesData,
+    loading: secondSeriesLoading,
+    error: secondSeriesError,
+  } = useApi(secondSeriesApiUrl);
 
   const [subtractedData, setSubtractedData] = useState(null);
 
   useEffect(() => {
-    if (data1 && data2) {
-      const observationsData1 = data1?.observations?.map(({ date, value }) => ({
-        date,
-        value: parseFloat(value, 2),
-      }));
-      const observationsData2 = data2?.observations?.map(({ date, value }) => ({
-        date,
-        value: parseFloat(value, 2),
-      }));
+    if (firstSeriesData && secondSeriesData) {
+      const observationsFirstSeries = firstSeriesData?.observations?.map(
+        ({ date, value }) => ({
+          date,
+          value: parseFloat(value, 2),
+        })
+      );
+      const observationsSecondSeries = secondSeriesData?.observations?.map(
+        ({ date, value }) => ({
+          date,
+          value: parseFloat(value, 2),
+        })
+      );
 
       // Create a map for easy lookup based on date
-      const data2Map = new Map(
-        observationsData2.map(({ date, value }) => [date, value])
+      const secondSeriesMap = new Map(
+        observationsSecondSeries.map(({ date, value }) => [date, value])
       );
-      console.log("data2Map", data2Map);
 
       // Find common dates
-      const commonDates = observationsData1.filter(({ date }) =>
-        data2Map.has(date)
+      const commonDates = observationsFirstSeries.filter(({ date }) =>
+        secondSeriesMap.has(date)
       );
 
       // Save the matched data in subtractedData
       const subtractedData = commonDates.map(({ date, value }) => ({
         date,
-        value: value - data2Map.get(date),
+        value: value - secondSeriesMap.get(date),
       }));
-
-      console.log("subs", subtractedData);
 
       setSubtractedData(subtractedData);
     }
-  }, [data1, data2]);
+  }, [firstSeriesData, secondSeriesData]);
 
-  if (loading1 || loading2) {
+  if (firstSeriesLoading || secondSeriesLoading) {
     return (
       <div className="loading-container">
         <Bars
@@ -65,17 +77,19 @@ export default function Line(props) {
     );
   }
 
-  if (error1 || error2) {
+  if (firstSeriesError || secondSeriesError) {
     return (
       <p className="error-message">
-        Error: {error1?.message || error2?.message}
+        Error: {firstSeriesError?.message || secondSeriesError?.message}
       </p>
     );
   }
-  var options = {
+
+  var chartOptions = {
     legend: { position: "none" },
     colors: ["#4c4cd1"],
   };
+
   return (
     <div>
       {subtractedData && (
@@ -83,7 +97,7 @@ export default function Line(props) {
           chartType="Line"
           width="100%"
           height="400px"
-          options={options}
+          options={chartOptions}
           data={[
             ["Year", "Difference"],
             ...subtractedData.map(({ date, value }) => [date, value]),

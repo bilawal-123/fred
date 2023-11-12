@@ -5,11 +5,12 @@ import config from "../config/config";
 
 // Loader component
 import { Bars } from "react-loader-spinner";
-export default function Shaded(props) {
+
+export default function ShadedAreaChart(props) {
   const seriesId = props.id;
   const apiUrl = `${config.apiPath}${seriesId}&api_key=${config.apiKey}&file_type=json`;
   const { data, loading, error } = useApi(apiUrl);
-  const [shadedLineChartData, setShadedLineChartData] = useState(null);
+  const [areaChartData, setAreaChartData] = useState(null);
 
   useEffect(() => {
     if (data) {
@@ -17,12 +18,11 @@ export default function Shaded(props) {
         date,
         parseFloat(value),
       ]);
-      console.log("Result", observationsData);
       const observationDataWithColumns = [
         ["Year", "Difference"],
         ...observationsData,
       ];
-      setShadedLineChartData(observationDataWithColumns);
+      setAreaChartData(observationDataWithColumns);
     }
   }, [data]);
 
@@ -45,18 +45,20 @@ export default function Shaded(props) {
   if (error) {
     return <p className="error-message">Error: {error.message}</p>;
   }
-  var options = {
+
+  var chartOptions = {
     legend: { position: "none" },
     colors: ["#4c4cd1"],
   };
+
   return (
     <div>
       <Chart
         chartType="AreaChart"
         width="100%"
         height="400px"
-        options={options}
-        data={shadedLineChartData}
+        options={chartOptions}
+        data={areaChartData}
       />
     </div>
   );

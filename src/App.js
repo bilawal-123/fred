@@ -58,7 +58,7 @@ function App() {
                 <strong>DGS10</strong> minus <strong>T10YIE</strong>: plot line
                 chart
               </p>
-              <Line id1="DGS10" id2="T10YIE"></Line>
+              <Line firstSeriesId="DGS10" secondSeriesId="T10YIE"></Line>
             </div>
           </Tab.Panel>
         </Tab.Panels>
