@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto";
+}
+.container {
+  width: 1200px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.chart-box {
+  margin-bottom: 30px;
+}
+.chart-box h1 {
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  font-size: 24px;
+}
+
+.chart-box p {
+  margin-top: 0;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  color: #4c4cd1;
+}
+.chart-button-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  gap: 5px;
+}
+
+.chart-button-row .chart-btn {
+  background: #ebebeb;
+  border: 0;
+  border-radius: 0;
+  padding: 20px;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  flex: 0 0 33.33%;
+}
+
+.chart-button-row .chart-btn.selected {
+  background: #4c4cd1;
+  color: #fff;
+}
+
+button:focus-visible {
+  outline: none;
+}
+.loading-container {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+p.error-message {
+  border: 0;
+  width: 100%;
+  height: 300px;
+  background: #ffe5e5;
+  color: red;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
