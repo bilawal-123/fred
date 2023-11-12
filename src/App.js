@@ -2,10 +2,11 @@ import "./App.css";
 import Line from "./components/Line";
 import Bar from "./components/Bar";
 import Shaded from "./components/Shaded";
-
+// React Tabs
 import { Fragment } from "react";
 import { Tab } from "@headlessui/react";
-
+// React Icons
+import { MdAreaChart, MdBarChart, MdShowChart } from "react-icons/md";
 function App() {
   return (
     <div className="container">
@@ -14,21 +15,21 @@ function App() {
           <Tab as={Fragment}>
             {({ selected }) => (
               <button className={selected ? "selected chart-btn" : "chart-btn"}>
-                Shaded Chart
+                <MdAreaChart className="graph-icon" /> Shaded Chart
               </button>
             )}
           </Tab>
           <Tab as={Fragment}>
             {({ selected }) => (
               <button className={selected ? "selected chart-btn" : "chart-btn"}>
-                Bar Chart
+                <MdBarChart className="graph-icon" /> Bar Chart
               </button>
             )}
           </Tab>
           <Tab as={Fragment}>
             {({ selected }) => (
               <button className={selected ? "selected chart-btn" : "chart-btn"}>
-                Line Chart
+                <MdShowChart className="graph-icon" /> Line Chart
               </button>
             )}
           </Tab>

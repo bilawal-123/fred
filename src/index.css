@@ -42,10 +42,21 @@ body {
   font-weight: bold;
   cursor: pointer;
   flex: 0 0 33.33%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.chart-button-row .chart-btn .graph-icon {
+  font-size: 18px;
+  color: #4c4cd1;
 }
 
 .chart-button-row .chart-btn.selected {
   background: #4c4cd1;
+  color: #fff;
+}
+.chart-button-row .chart-btn.selected .graph-icon {
   color: #fff;
 }
 
