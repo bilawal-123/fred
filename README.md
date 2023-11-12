@@ -30,7 +30,7 @@ You may also see any lint errors in the console.
 - React Icons
   https://react-icons.github.io/react-icons
 
-  ## API
+## API
 
-  FRED Economic Data
-  https://fred.stlouisfed.org/docs/api/fred/
+FRED Economic Data
+https://fred.stlouisfed.org/docs/api/fred/
